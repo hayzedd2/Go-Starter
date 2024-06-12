@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
 
 func main() {
 	// STRINGS
@@ -139,25 +135,36 @@ func main() {
 	// cycleScore([]int{4, 8, 5, 9, 10}, printScore)
 	// area := calcArea(15)
 	// fmt.Printf("Area is %v \n", area)
-	fn, sn := getInitials("azeez alhameen")
-	fmt.Printf("First initial is %v and second is %v", fn, sn)
+	// fn, sn := getInitials("azeez")
+	// fmt.Printf("First initial is %v and second is %v", fn, sn)
+
+	// calcPoints("Main")
+	// presentScore()
+	// for _, p := range points {
+	// 	fmt.Println(p)
+	// }
+	presentScore()
+
 }
+
+var testScore = [3]int{2, 7, 8}
+var testStudents = [3]string{"azeez", "rayo", "ayomide"}
 
 // azeez - AZEEZ - a
-func getInitials(n string) (string, string) {
-	u := strings.ToUpper(n)
-	s := strings.Split(u, "")
+// func getInitials(n string) (string, string) {
+// 	u := strings.ToUpper(n)
+// 	s := strings.Split(u, " ")
 
-	var initials []string
-	for _, v := range s {
-		initials = append(initials, v[:1])
-	}
-	if len(initials) > 1 {
-		return initials[0], initials[1]
-	}
-	return initials[0], ""
+// 	var initials []string
+// 	for _, v := range s {
+// 		initials = append(initials, v[:1])
+// 	}
+// 	if len(initials) > 1 {
+// 		return initials[0], initials[1]
+// 	}
+// 	return initials[0], ""
 
-}
+// }
 
 // func printScore(score int) {
 // 	fmt.Printf("Your score is %v \n", score)
