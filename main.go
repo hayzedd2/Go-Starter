@@ -1,5 +1,6 @@
 package main
 
+import "fmt"
 
 func main() {
 	// STRINGS
@@ -143,7 +144,13 @@ func main() {
 	// for _, p := range points {
 	// 	fmt.Println(p)
 	// }
-	presentScore()
+	// presentScore()
+
+	newbill := newBill("zedd's bill")
+	newbill.updateTip(10)
+	newbill.addItem("Coffee", 6.99)
+	newbill.addItem("Milo", 9.99)
+	fmt.Println(newbill.format())
 
 }
 
