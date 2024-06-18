@@ -1,6 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
 
 func main() {
 	// STRINGS
@@ -145,17 +151,58 @@ func main() {
 	// 	fmt.Println(p)
 	// }
 	// presentScore()
-
-	newbill := newBill("zedd's bill")
-	newbill.updateTip(10)
-	newbill.addItem("Coffee", 6.99)
-	newbill.addItem("Milo", 9.99)
-	fmt.Println(newbill.format())
+	billCreate := createBill()
+	fmt.Println(billCreate)
 
 }
 
-var testScore = [3]int{2, 7, 8}
-var testStudents = [3]string{"azeez", "rayo", "ayomide"}
+func createBill() bill {
+	reader := bufio.NewReader(os.Stdin)
+	name, _ := getInput("Create a new bill: ", reader)
+	b := newBill(name)
+	promptOptions(b)
+	fmt.Println("New bill ceated -", b.name)
+	return b
+}
+
+func promptOptions(b bill) {
+	reader := bufio.NewReader(os.Stdin)
+	opt, _ := getInput("Choose your poison(a - to add, s - to save , t - to tip): ", reader)
+
+	switch opt {
+	case "a":
+		itemName , _ := getInput("Item name: ",reader)
+		itemPrice,_ := getInput("Item Price: ", reader)
+		p,err:= strconv.ParseFloat(itemPrice , 64)
+		if err != nil{
+			fmt.Println("Price must be a number")
+			promptOptions(b)
+		}
+		b.addItem(itemName, p)
+		fmt.Println("Items added - ", itemName,p)
+		promptOptions(b)
+	case "t":
+		tip, _ := getInput("Tip amount($): ",reader)
+		t,err := strconv.ParseFloat(tip,64)
+		if err!= nil{
+			fmt.Println("Tip must be a number")
+			promptOptions(b)
+		}
+		b.updateTip(t)
+		fmt.Println("Tip added successfully - ", tip)
+	case "s":
+		fmt.Println("You chose to save the bill",b)
+	default:
+		fmt.Println("you have not chosen a valid option...")
+		promptOptions(b)
+	}
+}
+func getInput(prompt string, r *bufio.Reader) (string, error) {
+	fmt.Print(prompt)
+	input, err := r.ReadString('\n')
+	return strings.TrimSpace(input), err
+
+}
 
 // azeez - AZEEZ - a
 // func getInitials(n string) (string, string) {
