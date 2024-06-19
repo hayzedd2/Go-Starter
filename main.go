@@ -152,7 +152,7 @@ func main() {
 	// }
 	// presentScore()
 	billCreate := createBill()
-	fmt.Println(billCreate)
+	fmt.Println(billCreate.format())
 
 }
 
@@ -182,15 +182,17 @@ func promptOptions(b bill) {
 		fmt.Println("Items added - ", itemName,p)
 		promptOptions(b)
 	case "t":
-		tip, _ := getInput("Tip amount($): ",reader)
+		tip,_ := getInput("Tip amount($): ",reader)
 		t,err := strconv.ParseFloat(tip,64)
-		if err!= nil{
+		if err != nil{
 			fmt.Println("Tip must be a number")
 			promptOptions(b)
 		}
 		b.updateTip(t)
 		fmt.Println("Tip added successfully - ", tip)
+		promptOptions(b)
 	case "s":
+		b.save()
 		fmt.Println("You chose to save the bill",b)
 	default:
 		fmt.Println("you have not chosen a valid option...")
